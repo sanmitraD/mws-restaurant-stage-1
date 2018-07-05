@@ -154,10 +154,42 @@ class DBHelper {
   }
 
   /**
+   *Large restaurant image URL .
+   */
+
+  static imageUrlForRestaurantLarge(restaurant) {
+    return (`/img/${restaurant.id}-1600_large_2x.jpg`);
+  }
+
+  /**
+   *medium restaurant image URL .
+   */
+
+  static imageUrlForRestaurantMedium(restaurant) {
+    return (`/img/${restaurant.id}-800_medium_1x.jpg`);
+  }
+
+  /**
+   *Small restaurant image URL .
+   */
+
+  static imageUrlForRestaurantSmall(restaurant) {
+    return (`/img/${restaurant.id}-400_small.jpg`);
+  }
+
+  /**
+   *Information about photograph .
+   */
+
+  static aboutPhotograph(restaurant) {
+    return (`${restaurant.about_photograph}`);
+  }
+
+  /**
    * Map marker for a restaurant.
    */
    static mapMarkerForRestaurant(restaurant, map) {
-    // https://leafletjs.com/reference-1.3.0.html#marker  
+    // https://leafletjs.com/reference-1.3.0.html#marker
     const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
       {title: restaurant.name,
       alt: restaurant.name,
@@ -165,7 +197,7 @@ class DBHelper {
       })
       marker.addTo(newMap);
     return marker;
-  } 
+  }
   /* static mapMarkerForRestaurant(restaurant, map) {
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
@@ -178,4 +210,3 @@ class DBHelper {
   } */
 
 }
-
