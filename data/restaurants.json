@@ -9,6 +9,7 @@
       "lat": 40.713829,
       "lng": -73.989667
     },
+    "about_photograph": "A restaurant with grandiloquent lights and a royal ware of furniture with a lot of people with enjoyment",
     "cuisine_type": "Asian",
     "operating_hours": {
       "Monday": "5:30 pm - 11:00 pm",
@@ -49,6 +50,7 @@
       "lng": -73.966393
     },
     "cuisine_type": "Pizza",
+    "about_photograph": "A delicous and apertive pizza, which you shouldn't miss.",
     "operating_hours": {
       "Monday": "5:30 pm - 11:00 pm",
       "Tuesday": "5:30 pm - 11:00 pm",
@@ -87,6 +89,7 @@
       "lat": 40.747143,
       "lng": -73.985414
     },
+    "about_photograph": "a modern and classical wooden furniture with Korean nativity",
     "cuisine_type": "Asian",
     "operating_hours": {
       "Monday": "11:30 am - 2:00 am",
@@ -126,6 +129,7 @@
       "lat": 40.722216,
       "lng": -73.987501
     },
+    "about_photograph": "a restaurant with a great lighting at the corner of junction",
     "cuisine_type": "American",
     "operating_hours": {
       "Monday": "8:00 am - 10:30 pm",
@@ -165,6 +169,7 @@
       "lat": 40.705089,
       "lng": -73.933585
     },
+    "about_photograph": "a restaurant with a lot of pizza fans",
     "cuisine_type": "Pizza",
     "operating_hours": {
       "Monday": "11:00 am - 12:00 am",
@@ -204,6 +209,7 @@
       "lat": 40.674925,
       "lng": -74.016162
     },
+    "about_photograph": "A restaurant with a large variation between it's outlook and it's food taste.",
     "cuisine_type": "American",
     "operating_hours": {
       "Monday": "Closed",
@@ -243,6 +249,7 @@
       "lat": 40.727397,
       "lng": -73.983645
     },
+    "about_photograph": "A restaurant with a classic look with glass walls",
     "cuisine_type": "American",
     "operating_hours": {
       "Monday": "11:30 am - 10:00 pm",
@@ -282,6 +289,7 @@
       "lat": 40.726584,
       "lng": -74.002082
     },
+    "about_photograph": "a Dutch restaurant with a beautiful tree infront of it",
     "cuisine_type": "American",
     "operating_hours": {
       "Monday": "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
@@ -321,6 +329,7 @@
       "lat": 40.743797,
       "lng": -73.950652
     },
+    "about_photograph": "An asian restaurant with a lot of tech freqs.",
     "cuisine_type": "Asian",
     "operating_hours": {
       "Monday": "5:00 pm - 10:00 pm",
@@ -360,6 +369,7 @@
       "lat": 40.743394,
       "lng": -73.954235
     },
+    "about_photograph": "A restaurant with a white furniture.",
     "cuisine_type": "Mexican",
     "operating_hours": {
       "Monday": "5:00 pm - 12:00 am",
