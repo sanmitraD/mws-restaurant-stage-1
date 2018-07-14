@@ -13,14 +13,14 @@
 
 <body>
   <header>
-    <nav>
+    <nav class="header-nav">
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
   </header>
 
   <main id="maincontent">
     <section id="map-container">
-      <div id="map"></div>
+      <div id="map" aria-label="map-application"></div>
     </section>
     <section id="restaurants-container">
       <div class="filter">
@@ -29,10 +29,10 @@
             <h2>Filter Results</h2>
           </div>
           <div class="filter-options-content">
-            <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+            <select id="neighborhoods-select" name="neighborhoods" aria-label="please select your neighborhood" onchange="updateRestaurants()">
               <option value="all">All Neighborhoods</option>
             </select>
-            <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+            <select id="cuisines-select" name="cuisines" aria-label="please select the cuisine type" onchange="updateRestaurants()">
               <option value="all">All Cuisines</option>
             </select>
           </div>

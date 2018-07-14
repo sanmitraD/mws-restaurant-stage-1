@@ -18,7 +18,10 @@
   }
 
   #breadcrumb {
-    width: 100%;
+    width: auto;
+  }
+  .breadcrumb {
+    width: 100vw;
   }
   .inside #restaurant-header {
     display: flex;
@@ -64,8 +67,8 @@
   .restaurant-info, .timings {
     width: 50%;
   }
-  #restaurant-hours {
-    margin-top: 10vw;
+  #restaurant-address {
+    margin-top: 7vw;
   }
 
   #restaurant-container,

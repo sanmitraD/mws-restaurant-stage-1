@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,13 +16,16 @@
   <!-- Beginning header -->
   <header id="restaurant-header">
     <!-- Beginning nav -->
-    <nav>
+    <nav class="header-nav">
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
-      <li><a href="/">Home</a></li>
-    </ul>
+    <!-- NOTE: According to ARIA Breadcrumb is nested inside the nav element -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ul id="breadcrumb">
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
@@ -31,26 +34,29 @@
   <!-- Beginning main -->
   <main id="restaurant_maincontent">
     <!-- Beginning map -->
-    <section id="map-container">
-      <div id="map"></div>
+    <section id="map-container" aria-label="map-application">
+      <div id="map" aria-label="map application"></div>
     </section>
     <!-- End map -->
     <!-- Beginning restaurant -->
     <section id="restaurant-container">
-      <h1 id="restaurant-name"></h1>
+      <!-- NOTE: inorder to maintain higherarchy of headings h1 below is replaced with h2 tag -->
+      <h2 id="restaurant-name"></h2>
       <div class="restaurant-info">
         <img id="restaurant-img">
         <p id="restaurant-cuisine"></p>
-        <p id="restaurant-address"></p>
+      <!-- NOTE: instead of p tag, used address tag to be semantic -->
       </div>
-      <div class="timings">
-        <table id="restaurant-hours"></table>
-      </div>
+
+      <section class="timings">
+        <address id="restaurant-address" tabindex="0"></address>
+        <table id="restaurant-hours" tabindex="0"></table>
+      </section>
     </section>
 
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="reviews-container">
+    <section id="reviews-container" tabindex="0" aria-label="Reviews">
       <ul id="reviews-list"></ul>
     </section>
     <!-- End reviews -->

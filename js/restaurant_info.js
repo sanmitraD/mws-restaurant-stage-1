@@ -90,10 +90,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurantLarge(restaurant);
   image.alt = DBHelper.aboutPhotograph(restaurant);
+  
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
-
+  cuisine.setAttribute('aria-label',`cuisine-type: ${restaurant.cuisine_type}`);
   // fill operating hours
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
@@ -159,19 +160,22 @@ createReviewHTML = (review) => {
   date.setAttribute('class', 'review-date');
   date.innerHTML = review.date;
   reviewInfo.appendChild(date);
+  reviewInfo.setAttribute('aria-label',`review by ${review.name} on ${review.date}`);
   li.appendChild(reviewInfo);
   const rating = document.createElement('p');
   rating.setAttribute('class', 'review-rating');
 
   rating.innerHTML = `Rating: ${review.rating}`;
+
   li.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.setAttribute('class', 'comments');
 
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
 
+  li.appendChild(comments);
+  li.setAttribute('tabindex','0');
   return li;
 }
 
@@ -180,8 +184,14 @@ createReviewHTML = (review) => {
  */
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
+  //breadcrumb.a.setAttribute('aria-current','page');
   const li = document.createElement('li');
-  li.innerHTML = restaurant.name;
+  //according to ARIA design patterns the element in a breadcrumb is an anchor element
+  const anchor = document.createElement('a');
+  anchor.href = '#';
+  anchor.innerHTML = restaurant.name;
+  anchor.setAttribute('aria-current','page');
+  li.appendChild(anchor);
   breadcrumb.appendChild(li);
 }
 
