@@ -76,6 +76,18 @@ fetchRestaurantFromURL = (callback) => {
   }
 }
 
+about_images = {
+  "1": "A restaurant with grandiloquent lights and a royal ware of furniture with a lot of people with enjoyment",
+  "2": "A delicous and apertive pizza, which you shouldn't miss.",
+  "3": "a modern and classical wooden furniture with Korean nativity",
+  "4": "a restaurant with a great lighting at the corner of junction",
+  "5": "a restaurant with a lot of pizza fans",
+  "6": "A restaurant with a large variation between it's outlook and it's food taste.",
+  "7": "A restaurant with a classic look with glass walls",
+  "8": "a Dutch restaurant with a beautiful tree infront of it",
+  "9": "An asian restaurant with a lot of tech freqs.",
+  "10": "A restaurant with a white furniture."
+}
 /**
  * Create restaurant HTML and add it to the webpage
  */
@@ -89,8 +101,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurantLarge(restaurant);
-  image.alt = DBHelper.aboutPhotograph(restaurant);
-  
+  console.log(restaurant);
+  console.log(restaurant.id);
+  image.alt = about_images[restaurant.id];
+  console.log(image.alt);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
