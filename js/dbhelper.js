@@ -1,7 +1,23 @@
+if (typeof idb === 'undefined') {
+  self.importScripts('idb.js');
+}
+
+
+
 /**
- * Common database helper functions.
- */
+oi */
 class DBHelper {
+  constructor(){
+    this.DBPromise = this.createDB();
+  }
+
+  static createDB()
+  {
+    return idb.open("restaurant",1, function(upgradeDb){
+      upgradeDb.createObjectStore('restaurants',{keyPath: "id"});
+    } );
+  }
+
 
   /**
    * Database URL.
@@ -15,12 +31,22 @@ class DBHelper {
   const port = 1337
   return `http://localhost:${port}/restaurants`;
 
-  }
-
+}/*
+  offlineCollect(){
+    this.DBPromise.then(function(db) {
+      var tx = db.transaction("restaurants","readonly");
+      var store = tx.objectStore('restaurants');
+      var restaurants = store.getAll();
+      console.log(restaurants);
+      tx.complete;
+      return restaurants;
+    });
+  }*/
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
+    //offlineCollect();
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
@@ -28,14 +54,44 @@ class DBHelper {
         const json = JSON.parse(xhr.responseText);
         //const restaurants = json.restaurants;
         const restaurants = json;
-        console.log("JSON = ", json);
-        console.log("REstaurants =  ", restaurants);
+        this.DBPromise = this.createDB();
+        this.DBPromise.then(function(db) {
+          var tx = db.transaction("restaurants","readwrite");
+          var store = tx.objectStore('restaurants');
+
+          restaurants.forEach(function(restaurant) {
+            store.put(restaurant);
+          });
+          tx.complete;
+        });
+
+
+        //console.log("JSON = ", json);
+        //console.log("REstaurants =  ", restaurants);
         callback(null, restaurants);
       } else { // Oops!. Got an error from server.
         const error = (`Request failed. Returned status of ${xhr.status}`);
         callback(error, null);
       }
     };
+    xhr.onerror = () => {
+
+        //const restaurants = json.restaurants;
+        var restaurants;
+        this.DBPromise = this.createDB();
+        this.DBPromise.then(function(db) {
+          var tx = db.transaction("restaurants","readonly");
+          var store = tx.objectStore('restaurants');
+          return store.getAll();
+        }).then(function(value) {
+          console.log(value);
+          restaurants = value;
+          console.log('collecting data from idb and sending');
+          callback(null, restaurants);
+        });
+        tx.complete;
+    };
+
     xhr.send();
   }
 

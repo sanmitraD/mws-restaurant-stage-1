@@ -5,7 +5,7 @@ var urlsToBeCached = [
   '/css/styles.css',
   '/css/responsive.css',
   '/css/responsive_restaurant.css',
-  '/data/restaurants.json',
+
   '/js/dbhelper.js',
   '/js/main.js',
   '/js/restaurant_info.js'
