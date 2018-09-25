@@ -88,8 +88,9 @@ class DBHelper {
           restaurants = value;
           console.log('collecting data from idb and sending');
           callback(null, restaurants);
+          tx.complete;
+
         });
-        tx.complete;
     };
 
     xhr.send();
