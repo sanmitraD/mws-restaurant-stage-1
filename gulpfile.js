@@ -13,7 +13,7 @@ gulp.task("default",['copy-html','minify-js','styles','copy-sw','copy-manifest']
   //as manifest wouldn't be changed often so i didn't make it to watch
 });
 
-gulp.task('dist',['copy-html','styles','minify-js','copy-images','copy-sw','copy-manifest'])
+gulp.task('dist',['copy-html','styles','minify-js','optimise-images','copy-sw','copy-manifest']);
 
 
 
