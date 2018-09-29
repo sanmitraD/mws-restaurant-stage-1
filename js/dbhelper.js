@@ -346,6 +346,7 @@ class DBHelper {
     };
 
     if(!navigator.onLine && (saveOfflineReview.name==='offReview')){
+      console.log("we are offline");
       DBHelper.postWhenOnline(saveOfflineReview);
       return;
     }
@@ -367,7 +368,9 @@ class DBHelper {
   }
   static postWhenOnline(offReview){
     localStorage.setItem('data',JSON.stringify(offReview.data));
-    window.addEventListener('onLine',(e) => {
+
+    window.addEventListener('online',(e) => {
+      console.log('back to onLine');
       let data=JSON.parse(localStorage.getItem('data'));
       if(data !== null) {
         if(offReview.name == 'offReview'){

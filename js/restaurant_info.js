@@ -185,7 +185,8 @@ createNewReview = () => {
   const ul = document.getElementById('reviews-list');
   ul.appendChild(createReviewHTML(review));
 
-  document.getElementById("myForm").reset();
+  const form = document.getElementById('reviewForm');
+  form.reset();
 }
 
 /**
