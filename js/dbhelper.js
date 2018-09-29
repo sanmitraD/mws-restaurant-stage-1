@@ -326,7 +326,7 @@ class DBHelper {
 
   static updateOfflineComments(reviews) {
     let dbp_new=dbp;
-    console.log(dbp_new);
+
     dbp_new.then(function(db) {
       var tx = db.transaction("reviews","readwrite");
       var store = tx.objectStore('reviews');
@@ -379,6 +379,23 @@ class DBHelper {
         localStorage.removeItem('data');
       }
     });
+  }
+
+  static changeFavouriteValue(id, value){
+    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${value}`,{method:'PUT'})
+    .then(function() {
+      let dbp_new=dbp;
+      dbp_new.then(function(db) {
+        var tx = db.transaction("restaurants","readwrite");
+        var store = tx.objectStore('restaurants');
+        store.get(id).then(restaurant => {
+          restaurant.is_favorite = value;
+          store.put(restaurant);
+        });
+        });
+
+      });
+
   }
 
 }
