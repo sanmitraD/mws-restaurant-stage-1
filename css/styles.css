@@ -493,13 +493,15 @@ nav h1 a {
 .fav,.not-fav {
 	margin: 5px 0;
 	padding: 5px 30px;
-	color: white;
+
 	border-radius: 10px;
 	font-size: 1.1em;
 }
 .fav {
 	background-color: rgb(244, 16, 9);
+	color: #fff;
 }
 .not-fav {
 	background-color:rgb(68, 249, 5);
+	color:#000;
 }
