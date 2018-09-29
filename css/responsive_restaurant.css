@@ -27,7 +27,13 @@
     display: flex;
     flex-wrap: wrap;
   }
-
+  label{
+    width: 100%;
+  }
+  #post-review-name, #post-review-rating {
+    display: flex;
+    flex-wrap: wrap;
+  }
   #restaurant-header nav {
     width: 100%;
     height: auto;
@@ -54,6 +60,17 @@
     width: 100%;
   }
 
+  .submit-button {
+    width: 100%;
+  }
+
+
+  #post-review-submit {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px;
+  }
+
 }
 
 @media screen and (min-width: 426px) and (max-width: 768px) {
@@ -61,6 +78,10 @@
     max-width: 550px;
     margin: auto;
   }
+  label {
+    width: 100%;
+  }
+
 }
 
 @media screen and (min-width: 769px) {

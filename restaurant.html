@@ -56,6 +56,35 @@
 
     <!-- end restaurant -->
     <!-- Beginning reviews -->
+    <section id="post-review">
+      <form class="post-review" action="http://localhost:1337/reviews/" method="post">
+        <input type="hidden" name="id" id="post-review-id" value="">
+        <div id="post-review-header">
+          <div id="post-review-name">
+            <label for="name">Your Name</label>
+            <input type="text" name="name" value="">
+          </div>
+          <div id="post-review-rating">
+            <label for="rating">Rating</label>
+            <select class="rating-style" name="rating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="post-review-comment">
+          <label for="comment">Your Review</label>
+          <textarea name="comment" rows="8" cols="80"></textarea>
+          <input type="submit" id="post-review-submit" name="submit" value="post!">
+        </div>
+
+
+      </form>
+    </section>
     <section id="reviews-container" tabindex="0" aria-label="Reviews">
       <ul id="reviews-list"></ul>
     </section>

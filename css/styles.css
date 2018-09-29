@@ -37,6 +37,10 @@ h1, h2, h3, h4, h5, h6 {
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+
+
+
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
@@ -418,4 +422,50 @@ nav h1 a {
   color: #666;
 	width: 50%;
 	text-align: center;
+}
+
+/*=============================post-review================================*/
+#post-review {
+	width: 100%;
+	max-width: 800px;
+	margin: auto;
+	padding: 5px;
+}
+#post-review-header{
+	width: calc(100% - 20px);
+	margin: auto;
+	display: flex;
+	padding: 10px;
+}
+#post-review-name {
+	width: 75%;
+}
+#post-review-rating{
+	width: 25%;
+}
+
+
+#post-review-comment {
+	padding: 10px;
+	width: (100% - 20px);
+	display: flex;
+	flex-wrap: wrap;
+}
+#post-review-comment label {
+	width: 100%;
+}
+
+
+#post-review-comment textarea {
+	width: 100%;
+
+}
+
+
+#post-review-comment input {
+	width: 100%;
+	
+	margin: auto;
+	padding: 10px;
+
 }
