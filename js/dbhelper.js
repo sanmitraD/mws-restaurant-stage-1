@@ -2,22 +2,28 @@ if (typeof idb === 'undefined') {
   self.importScripts('idb.js');
 }
 
-
+var dbp;
 
 /**
 oi */
 class DBHelper {
   constructor(){
     this.DBPromise = this.createDB();
+    dbp=this.DBPromise;
   }
 
   static createDB()
   {
-    return idb.open("restaurant",1, function(upgradeDb){
-      upgradeDb.createObjectStore('restaurants',{keyPath: "id"});
+    return idb.open("restaurant",2, function(upgradeDb){
+      switch (upgradeDb.oldVersion) {
+        case 0:
+          upgradeDb.createObjectStore('restaurants',{keyPath: "id"});
+        case 1:
+          const reviewsStore = upgradeDb.createObjectStore('reviews',{keyPath:"id"});
+          reviewsStore.createIndex('reviews-by-restaurant-id','restaurant_id');
+      }
     } );
   }
-
 
   /**
    * Database URL.
@@ -54,7 +60,9 @@ class DBHelper {
         const json = JSON.parse(xhr.responseText);
         //const restaurants = json.restaurants;
         const restaurants = json;
+
         this.DBPromise = this.createDB();
+        dbp = this.DBPromise;
         this.DBPromise.then(function(db) {
           var tx = db.transaction("restaurants","readwrite");
           var store = tx.objectStore('restaurants');
@@ -79,6 +87,8 @@ class DBHelper {
         //const restaurants = json.restaurants;
         var restaurants;
         this.DBPromise = this.createDB();
+        dbp = this.DBPromise;
+
         this.DBPromise.then(function(db) {
           var tx = db.transaction("restaurants","readonly");
           var store = tx.objectStore('restaurants');
@@ -88,13 +98,15 @@ class DBHelper {
           restaurants = value;
           console.log('collecting data from idb and sending');
           callback(null, restaurants);
-          tx.complete;
+
 
         });
+
     };
 
     xhr.send();
   }
+
 
   /**
    * Fetch a restaurant by its ID.
@@ -112,6 +124,7 @@ class DBHelper {
           callback('Restaurant does not exist', null);
         }
       }
+
     });
   }
 
@@ -202,7 +215,10 @@ class DBHelper {
         callback(null, uniqueCuisines);
       }
     });
+
+
   }
+  /*return promise of reviews*/
 
   /**
    * Restaurant page URL.
@@ -273,5 +289,44 @@ class DBHelper {
     );
     return marker;
   } */
+  static getReviews(id) {
+    return fetch(`http://localhost:1337/reviews/?restaurant_id=${id}`)
+    .then(function(res) {
+      var jsonResponse =  res.json();
+      return jsonResponse;
+    }).then(function(res) {
+      return res;
+    })
+    .catch(function() {
+      let dbp_new=dbp;
+      return dbp_new.then(function(db) {
+        var tx = db.transaction("reviews","readonly");
+        var store = tx.objectStore('reviews');
+        var index = store.index('reviews-by-restaurant-id');
+        return index.getAll(id);
+      }).then(function(reviews) {
+        return reviews;
+      });
+    });
+  }
+
+  static loadOfflineComments(id){
+
+  }
+  static updateOfflineComments(reviews) {
+    let dbp_new=dbp;
+    console.log(dbp_new);
+    dbp_new.then(function(db) {
+      var tx = db.transaction("reviews","readwrite");
+      var store = tx.objectStore('reviews');
+      reviews.forEach(function(review) {
+        store.put(review);
+        console.log(review);
+      });
+      tx.complete;
+    });
+    return reviews;
+  }
+
 
 }

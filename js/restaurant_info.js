@@ -149,25 +149,35 @@ fillReviewsHTML = (id = self.restaurant.id/*reviews = self.restaurant.reviews*/)
   container.appendChild(title);
   console.log(self.restaurant.id);
 
-  fetch(`http://localhost:1337/reviews/?restaurant_id=${id}`)
-  .then(function(res) {
-    return res.json();
-  }).then(function(reviews) {
-    if (!reviews) {
-      const noReviews = document.createElement('p');
-      noReviews.innerHTML = 'No reviews yet!';
-      container.appendChild(noReviews);
-      return;
-    }
+DBHelper.getReviews(self.restaurant.id).then(function(reviews) {
+  if (!reviews) {
+    const noReviews = document.createElement('p');
+    noReviews.innerHTML = 'No reviews yet!';
+    container.appendChild(noReviews);
+    return;
+  }
 
-    const ul = document.getElementById('reviews-list');
-    reviews.forEach(review => {
-      ul.appendChild(createReviewHTML(review));
-    });
-    container.appendChild(ul);
+  const ul = document.getElementById('reviews-list');
+  reviews.forEach(review => {
+    ul.appendChild(createReviewHTML(review));
   });
+  container.appendChild(ul);
+  return reviews;
+});
 
 
+}
+
+
+function createNewReview(id) {
+  const form = document.forms['post-review'];
+
+  return {
+    'restaurant_id' : id,
+    'name': form['name'].value,
+    'rating' : form['rating'].value,
+    'comments':form['comment'].value
+  }
 }
 
 /**
