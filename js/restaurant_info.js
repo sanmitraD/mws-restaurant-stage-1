@@ -169,15 +169,23 @@ DBHelper.getReviews(self.restaurant.id).then(function(reviews) {
 }
 
 
-function createNewReview(id) {
-  const form = document.forms['post-review'];
+createNewReview = () => {
+  event.preventDefault();
+  const Name = document.getElementById('form-name');
+  const Rating = document.getElementById('form-rating');
+  const Comment = document.getElementById('form-comment');
 
-  return {
-    'restaurant_id' : id,
-    'name': form['name'].value,
-    'rating' : form['rating'].value,
-    'comments':form['comment'].value
-  }
+  const review= {
+    restaurant_id: parseInt(self.restaurant.id),
+    name: Name.value,
+    rating: parseInt(Rating.value),
+    comments: Comment.value
+  };
+  DBHelper.addReview(review);
+  const ul = document.getElementById('reviews-list');
+  ul.appendChild(createReviewHTML(review));
+
+  document.getElementById("myForm").reset();
 }
 
 /**

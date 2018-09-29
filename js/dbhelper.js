@@ -294,8 +294,22 @@ class DBHelper {
     .then(function(res) {
       var jsonResponse =  res.json();
       return jsonResponse;
-    }).then(function(res) {
-      return res;
+    }).then(function(reviews) {
+      console.log(reviews);
+      let dbp_new=dbp;
+      console.log(dbp_new);
+      dbp_new.then(function(db) {
+        var tx = db.transaction("reviews","readwrite");
+        var store = tx.objectStore('reviews');
+        reviews.forEach(function(review) {
+          store.put(review);
+          console.log(review);
+        });
+        tx.complete;
+      });
+
+      return reviews;
+
     })
     .catch(function() {
       let dbp_new=dbp;
@@ -310,9 +324,6 @@ class DBHelper {
     });
   }
 
-  static loadOfflineComments(id){
-
-  }
   static updateOfflineComments(reviews) {
     let dbp_new=dbp;
     console.log(dbp_new);
@@ -327,6 +338,44 @@ class DBHelper {
     });
     return reviews;
   }
+  static addReview(review) {
+    var saveOfflineReview = {
+      name: 'offReview',
+      data: review,
+      object_type: 'review'
+    };
 
+    if(!navigator.onLine && (saveOfflineReview.name==='offReview')){
+      DBHelper.postWhenOnline(saveOfflineReview);
+      return;
+    }
+
+
+
+    fetch('http://localhost:1337/reviews/',{
+      method:'POST',
+      body: JSON.stringify({
+        'restaurant_id':parseInt(review.restaurant_id),
+        'name':review.name,
+        'rating': parseInt(review.rating),
+        'comments': review.comments
+      }),
+      headers: new Headers({
+        'Content-Type':'application/json'
+      })
+    });
+  }
+  static postWhenOnline(offReview){
+    localStorage.setItem('data',JSON.stringify(offReview.data));
+    window.addEventListener('onLine',(e) => {
+      let data=JSON.parse(localStorage.getItem('data'));
+      if(data !== null) {
+        if(offReview.name == 'offReview'){
+          DBHelper.addReview(offReview.data);
+        }
+        localStorage.removeItem('data');
+      }
+    });
+  }
 
 }
