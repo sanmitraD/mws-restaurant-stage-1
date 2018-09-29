@@ -59,16 +59,16 @@
 
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="post-review">
+    <section id="post-review" aria-label="please give your valuable review on this restaurant" tabindex="0">
       <form name="post-review" id="reviewForm" class="post-review">
 
         <div id="post-review-header">
           <div id="post-review-name">
-            <label for="form-name" >Your Name</label>
+            <label for="form-name" aria-label="please enter your name here">Your Name</label>
             <input type="text" id="form-name" name="name" value="">
           </div>
           <div id="post-review-rating">
-            <label for="form-rating">Rating</label>
+            <label for="form-rating" aria-label="please give a rating between 1 to 5 depending on your experiance here">Rating</label>
             <select class="rating-style" id="form-rating" name="rating">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -80,7 +80,7 @@
         </div>
 
         <div id="post-review-comment">
-          <label for="form-comment">Your Review</label>
+          <label for="form-comment" aria-label="please provide your valuable comment on this restaurant">Your Review</label>
           <textarea name="comment" id="form-comment" rows="8" cols="80"></textarea>
           <button id="post-review-submit" onclick="createNewReview()">Submit Review</button>
         </div>
