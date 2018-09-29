@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const babel = require('gulp-babel');
@@ -19,7 +19,7 @@ gulp.task('dist',['copy-html','styles','minify-js','optimise-images','copy-sw','
 
 gulp.task('minify-js', function() {
     return gulp.src(['js/dbhelper.js','js/main.js','js/restaurant_info.js'])
-    .pipe(babel({presets:['es2015']}))
+    //.pipe(babel({presets:['es2016']}))
     .pipe(uglify())
     .on("error",function(e) {
       console.log(e);
