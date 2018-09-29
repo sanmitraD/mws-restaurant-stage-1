@@ -137,26 +137,37 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
   }
 }
 
+
+
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+fillReviewsHTML = (id = self.restaurant.id/*reviews = self.restaurant.reviews*/) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
+  console.log(self.restaurant.id);
 
-  if (!reviews) {
-    const noReviews = document.createElement('p');
-    noReviews.innerHTML = 'No reviews yet!';
-    container.appendChild(noReviews);
-    return;
-  }
-  const ul = document.getElementById('reviews-list');
-  reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
+  fetch(`http://localhost:1337/reviews/?restaurant_id=${id}`)
+  .then(function(res) {
+    return res.json();
+  }).then(function(reviews) {
+    if (!reviews) {
+      const noReviews = document.createElement('p');
+      noReviews.innerHTML = 'No reviews yet!';
+      container.appendChild(noReviews);
+      return;
+    }
+
+    const ul = document.getElementById('reviews-list');
+    reviews.forEach(review => {
+      ul.appendChild(createReviewHTML(review));
+    });
+    container.appendChild(ul);
   });
-  container.appendChild(ul);
+
+
 }
 
 /**
@@ -172,9 +183,14 @@ createReviewHTML = (review) => {
   reviewInfo.appendChild(name);
   const date = document.createElement('p');
   date.setAttribute('class', 'review-date');
+  if(review.date){
   date.innerHTML = review.date;
   reviewInfo.appendChild(date);
   reviewInfo.setAttribute('aria-label',`review by ${review.name} on ${review.date}`);
+  }
+  else{
+    reviewInfo.setAttribute('aria-label',`review by ${review.name}`);
+  }
   li.appendChild(reviewInfo);
   const rating = document.createElement('p');
   rating.setAttribute('class', 'review-rating');
