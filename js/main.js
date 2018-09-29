@@ -208,29 +208,48 @@ createRestaurantHTML = (restaurant) => {
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
   li.append(address);
-  const favourite = document.createElement('button');
-  if(restaurant.is_favourite)
-  favourite.innerHTML = 'remove favourite';
-  else {
-    favourite.innerHTML = 'add to favourite';
-  }
-  favourite.onclick = function() {
-    const afterClickValue = !restaurant.is_favorite;
-    restaurant.is_favorite = afterClickValue;
-    DBHelper.changeFavouriteValue(restaurant.id, afterClickValue);
-    if(restaurant.is_favorite)
-    favourite.innerHTML = 'remove favourite';
-    else {
-      favourite.innerHTML = 'add to favourite';
-    }
-  }
-
-  li.append(favourite);
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   more.setAttribute('aria-label',`${restaurant.name} of cuisine type ${restaurant.cuisine_type} in ${restaurant.neighborhood} neighborhood. For more details click on this`);
   li.append(more);
+
+  const favourite = document.createElement('button');
+  if(restaurant.is_favorite){
+  favourite.setAttribute('aria-label',`remove this restaurant as favourite`);
+  favourite.innerHTML = 'remove favourite';
+  favourite.classList.add("fav");
+  }
+  else {
+    favourite.setAttribute('aria-label',`make this restaurant as favourite`);
+    favourite.innerHTML = 'add to favourite';
+    favourite.classList.add("not-fav");
+
+  }
+
+  console.log(restaurant.is_favorite);
+
+  favourite.onclick = function() {
+    const afterClickValue = !restaurant.is_favorite;
+    restaurant.is_favorite = !restaurant.is_favorite;
+    DBHelper.changeFavouriteValue(restaurant.id, afterClickValue);
+    if(restaurant.is_favorite){
+    favourite.innerHTML = 'remove favourite';
+    favourite.setAttribute('aria-label',`remove this restaurant as favourite`);
+
+    favourite.classList.toggle('not-fav');
+    favourite.classList.toggle('fav');
+    }
+    else {
+      favourite.setAttribute('aria-label',`make this restaurant as favourite`);
+      favourite.innerHTML = 'add to favourite';
+      favourite.classList.toggle('not-fav');
+      favourite.classList.toggle('fav');
+    }
+
+  }
+
+  li.append(favourite);
 
   return li;
 }

@@ -220,7 +220,7 @@ nav h1 a {
   color: #fff;
   display: inline-block;
   font-size: 10pt;
-  margin: 15px 0 0;
+  margin: 10px 0 0;
   padding: 8px 30px 10px;
   text-align: center;
   text-decoration: none;
@@ -438,9 +438,19 @@ nav h1 a {
 	padding: 10px;
 }
 #post-review-name {
+
 	width: 75%;
 }
+#form-name{
+	padding: 5px;
+}
+
+#form-rating {
+	padding: 5px 10px;
+
+}
 #post-review-rating{
+
 	width: 25%;
 }
 
@@ -462,10 +472,24 @@ nav h1 a {
 }
 
 
-#post-review-comment input {
+#post-review-comment button {
 	width: 100%;
-	
+
 	margin: auto;
 	padding: 10px;
 
+}
+/*===============favourite===============*/
+.fav,.not-fav {
+	margin: 5px 0;
+	padding: 5px 30px;
+	color: white;
+	border-radius: 10px;
+	font-size: 1.1em;
+}
+.fav {
+	background-color: rgb(244, 16, 9);
+}
+.not-fav {
+	background-color:rgb(68, 249, 5);
 }
